@@ -37,24 +37,37 @@ var winOptions = [
   ];
   
 
+  $scope.p1 = [];
+  $scope.p2 = [];
+  
+  
 
   $scope.testJS = function() {
     console.log('Correctly accessing JS function.') ;
   } ;
 
  
+ 
+ 
   $scope.playerPicks = function(thisCell) {
 	if ($scope.clickCount %2!=0){ 
 		thisCell.status = "O" ;
 		thisCell.player = "p1";
-		console.log(thisCell.status, thisCell.id, thisCell.player)
+		$scope.p2.push(thisCell.id);
+		console.log(thisCell.status, thisCell.id, thisCell.player, $scope.p2)
+		
 		}
 		
 	else {
 		thisCell.status = "X" ;
 		thisCell.player = "p2";
-		console.log(thisCell.status, thisCell.id, thisCell.player)
+		$scope.p1.push(thisCell.id);
+		console.log(thisCell.status, thisCell.id, thisCell.player, $scope.p1)
+		
 		}
+	
+	
+	
 	
 	
 //	//when user selects box, it stays selected, box becomes locked.
