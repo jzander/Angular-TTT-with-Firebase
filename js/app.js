@@ -36,84 +36,92 @@ var winOptions = [
 	  [2,5,8]
   ];
   
-
-  $scope.p1 = [];
-  $scope.p2 = [];
-  
-  
+$scope.p1 = [];
+$scope.p2 = [];
 
   $scope.testJS = function() {
     console.log('Correctly accessing JS function.') ;
   } ;
 
  
- 
- 
   $scope.playerPicks = function(thisCell) {
-	if ($scope.clickCount %2!=0){ 
-		thisCell.status = "O" ;
-		thisCell.player = "p1";
-		$scope.p2.push(thisCell.id);
-		console.log(thisCell.status, thisCell.id, thisCell.player, $scope.p2)
-		
+  		if ( thisCell.status == "X" || thisCell.status == "O" )
+  	  		return;	
+  		  			
+		if ($scope.clickCount %2!=0){ 
+			thisCell.status = "O" ;
+			thisCell.player = "p2";
+			$scope.p2.push(thisCell.id);
+			console.log(thisCell.status, thisCell.id, thisCell.player, $scope.p1, $scope.p2);
+		}
+			
+		else {
+			thisCell.status = "X" ;
+			thisCell.player = "p1";
+			$scope.p1.push(thisCell.id);
+			console.log(thisCell.status, thisCell.id, thisCell.player, $scope.p1, $scope.p2);
 		}
 		
-	else {
-		thisCell.status = "X" ;
-		thisCell.player = "p2";
-		$scope.p1.push(thisCell.id);
-		console.log(thisCell.status, thisCell.id, thisCell.player, $scope.p1)
+		$scope.winCheck();
+			
+		$scope.clickCount = $scope.clickCount + 1 ;    
+		$scope.clickCounter.$set({clickCounter: $scope.clickCount}) ;
+	} ;
+
+		$scope.winCheck = function() {
+			for (var i = 0; i < winOptions.length; i++) {
+				var xPlays = 0;
+				var oPlays = 0;
+					for (var j = 0; j < winOptions[i].length; j++) {
+						for(var k = 0; k < $scope.p1.length; ++k){
+							if($scope.p1[k] == winOptions[i][j]) {
+								if ((++xPlays) == 3)
+								console.log('X wins');
+								
+							}
+						}
+						
+						for(var k = 0; k < $scope.p2.length; ++k){
+							if($scope.p2[k] == winOptions[i][j]) {
+								if ((++oPlays) == 3)
+								console.log('O wins');
+								
+							}
+						}
+					}
+			}
+		};
 		
-		}
+}) ;	// END OF CONTROLLER
+				
 	
-	
-	
-	
-	
-//	//when user selects box, it stays selected, box becomes locked.
-//	
-//	$scope.playGame = function(){
-//		for (var i = 0; i < winOptions.length; i++){ 
-//		var option = winOptions[i];
-//		if(thisCell.status == "X")
-//	
-//		
-//		//if box has a class of xclass keep it x.
+//		//after 5 moves, check for winner.
+//	    //when user selects box, it stays selected, box becomes locked.	//if box has a class of xclass keep it x.
 //		//if a box has a class of yclass, keep it y.
 //		//check for a win combo after each box selection.
-//		//declare a winner.
+//		//declare a winner.	
+//		
+//	
 //	}   
 //	
 //	}
 //	
 	
 	
-
+//	if {
+//		thisCell.status = "X" || thisCell.status = "O"; }
 	
 //	
 //	
 //	}
-	
-	
-//
-//    console.log("Cell was: " + thisCell.status) ;
-//    thisCell.status = "X" ;
-//    console.log("Cell is now: " + thisCell.status) ;
 
-//    console.log($scope.clickCount) ;
-    $scope.clickCount = $scope.clickCount + 1 ;
-    
-//    console.log(TTTRef.clickCounter);
-
-    $scope.clickCounter.$set({clickCounter: $scope.clickCount}) ;
-  } ;
+//insert after game has been won ----> $scope.gamesPlayed += 1;
   
 
 
 
 
-//insert after game has been won ----> $scope.gamesPlayed += 1;
+
 	
 	
 
-}) ;
