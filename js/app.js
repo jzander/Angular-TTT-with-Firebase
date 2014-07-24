@@ -4,28 +4,28 @@ TTTApp.controller('TTTController', function ($scope, $firebase) {
 
   var TTTRef = new Firebase("https://angulartoetactic.firebaseIO.com/") ;
 
-  $scope.clickCounter = $firebase(new Firebase("https://TTT.firebaseio.com/" + '/clickCounter'));
+  $scope.clickCounter = $firebase(new Firebase("https://angulartoetactic.firebaseio.com/clickCounter"));
 //   $scope.clickCounter.$add({clickCount:0});
 
   $scope.clickCount = 0 ; // <------ number of clicks reset after new game?
 //  $scope.gamesPlayed = 0 ; //<----- number of games played at start of game.
   
   $scope.remoteCellList = 
-  $firebase(new Firebase("https://angulartoetactic.firebaseIO.com/" + '/remoteCellList')) ;
+  	$firebase(new Firebase("https://angulartoetactic.firebaseIO.com/remoteCellList")) ;
   
 
   $scope.testString = "Angular source, App, and Controller present" ;
 
   $scope.cellList = [ // each individual cell with a unique ID.
-		{status: "A", id:0}, 
-		{status: "B", id:1}, 
-		{status: "C", id:2}, 
-		{status: "D", id:3}, 
-		{status: "E", id:4}, 
-		{status: "F", id:5}, 
-		{status: "G", id:6}, 
-		{status: "H", id:7}, 
-		{status: "I", id:8}
+		{status: "A", cellId:0}, 
+		{status: "B", cellId:1}, 
+		{status: "C", cellId:2}, 
+		{status: "D", cellId:3}, 
+		{status: "E", cellId:4}, 
+		{status: "F", cellId:5}, 
+		{status: "G", cellId:6}, 
+		{status: "H", cellId:7}, 
+		{status: "I", cellId:8}
 	]  ;
 
 $scope.remoteCellList.$bind($scope, "cellList");
@@ -57,18 +57,18 @@ $scope.p2 = [];
   		if ( thisCell.status == "X" || thisCell.status == "O" )
   	  		return;	 //if a cell has a status of X or O, exit the function and render the box unclickable and unchangeable until next game.
   		  			
-		if ($scope.clickCount %2!=0){ //every even move is O's turn
+		if ($scope.clickCount %2!=0 || $scope.p2.length < $scope.p1.length){ //every even move is O's turn
 			thisCell.status = "O" ;
 			thisCell.player = "p2"; // O is player two
-			$scope.p2.push(thisCell.id); // put the unique ID number for the chosen cell into p2's array.
-			console.log(thisCell.status, thisCell.id, thisCell.player, $scope.p1, $scope.p2);
+			$scope.p2.push(thisCell.cellId); // put the unique ID number for the chosen cell into p2's array.
+			console.log(thisCell.status, thisCell.cellId, thisCell.player, $scope.p1, $scope.p2);
 		}
 			
 		else {
 			thisCell.status = "X" ; //all other moves are X's.
 			thisCell.player = "p1"; // X is player one.
-			$scope.p1.push(thisCell.id); // put the unique ID number for the chosen cell into p1's array.
-			console.log(thisCell.status, thisCell.id, thisCell.player, $scope.p1, $scope.p2);
+			$scope.p1.push(thisCell.cellId); // put the unique ID number for the chosen cell into p1's array.
+			console.log(thisCell.status, thisCell.cellId, thisCell.player, $scope.p1, $scope.p2);
 		}
 		
 		$scope.winCheck(); //run the wincheck function after each turn.
