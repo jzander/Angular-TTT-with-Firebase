@@ -11,6 +11,70 @@
 		border-color: none;
 		margin: 0 auto 0 auto;
 		background-color: #708090;
+		z-index: 1;
+		position: relative;
+}
+
+.startScreen {
+	width: 468px;
+	height: 468px;
+	position: absolute;
+	background-color: rgba(255, 255, 255, .75);
+	z-index: 2;
+	font-family: helvetica;
+	color: #777;
+	text-align: center;
+	padding-top: 5em;
+}
+	
+.startBtn {
+	width: 170px;
+	height: 50px;
+	background-color: green;
+	color: white;
+	font-family: helvetica;
+	font-size: 1.3em;
+	border: none;
+	border-radius: 5px;
+	
+	-webkit-animation: fadein 1s; /* Safari and Chrome */
+	       -moz-animation: fadein 1s; /* Firefox */
+	        -ms-animation: fadein 1s; /* Internet Explorer */
+	         -o-animation: fadein 1s; /* Opera */
+	            animation: fadein 1s;
+	}
+	
+	@keyframes fadein {
+	    from { opacity: 0; }
+	    to   { opacity: 1; }
+	}
+	
+	/* Firefox */
+	@-moz-keyframes fadein {
+	    from { opacity: 0; }
+	    to   { opacity: 1; }
+	}
+	
+	/* Safari and Chrome */
+	@-webkit-keyframes fadein {
+	    from { opacity: 0; }
+	    to   { opacity: 1; }
+	}
+	
+	/* Internet Explorer */
+	@-ms-keyframes fadein {
+	    from { opacity: 0; }
+	    to   { opacity: 1; }
+	}​
+	
+}
+
+.startBtn:hover {
+	background-color: orange;
+}
+
+h1 {
+	font-size: 3em;
 }
 
 #aBox {
@@ -26,7 +90,6 @@
 }
 
 #aBox:hover {
-	background-color: #cfcfcf;
 	-webkit-transform: scale(1.05);
 	-ms-transform: scale(1.05);
 	transform: scale(1.05);

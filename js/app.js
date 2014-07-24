@@ -4,16 +4,24 @@ TTTApp.controller('TTTController', function ($scope, $firebase) {
 
   var TTTRef = new Firebase("https://tictacgo.firebaseio.com/") ;
 
+//  $scope.playGame = true;
+
   $scope.clickCounter = $firebase(new Firebase("https://tictacgo.firebaseio.com/clickCounter"));
 //   $scope.clickCounter.$add({clickCount:0});
 
-  $scope.clickCount = 0 ; // <------ number of clicks reset after new game?
+  $scope.clickCount = 0 ;  // <------ number of clicks reset after new game?
 //  $scope.gamesPlayed = 0 ; //<----- number of games played at start of game.
   
   $scope.remoteCellListContainer = 
   	$firebase(new Firebase("https://tictacgo.firebaseio.com/remoteCellListContainer")) ;
 
   $scope.testString = "Angular source, App, and Controller present" ;
+
+
+
+	$scope.startScreen = function () {
+		$scope.playGame = false;
+	}
 
   $scope.cellList = [ // each individual cell with a unique ID.
 		{status: "A", cellId:0}, 
@@ -102,6 +110,7 @@ var winOptions = [ // all possible winning combinations.
 							if(playerOneArray[k] == winOptions[i][j]) {
 								if ((++xPlays) == 3)
 								console.log('X wins');
+//								$scope.playGame = true;
 								//insert inner html XWINS!
 								//push win to scoreboard.
 								//show play again screen.
@@ -113,6 +122,7 @@ var winOptions = [ // all possible winning combinations.
 							if(playerTwoArray[k] == winOptions[i][j]) {
 								if ((++oPlays) == 3)
 								console.log('O wins');
+//								$scope.playGame = true;
 								//insert inner html OWINS!
 								//push win to scoreboard.
 								//show play again screen.

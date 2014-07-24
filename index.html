@@ -19,12 +19,16 @@
 	</section>
 
     <div x-ng-controller="TTTController" ng-model="cellListContainer.cellListArray">
+    	
         <p><!--TTT Reference with Firebase: --><br /><br /><!--{{clickCount}} clicks--></p>
         <div class="theBox" >
+        <div ng-show="playGame()" class="startScreen"><br /><br /><h1>Welcome to<br/> Tic Tac Toe.</h1>
+        <button ng-click="startScreen()" class="startBtn">Play!</button></div>
             <div x-ng-repeat="currentCell in cellListContainer.cellListArray">
                 <div class="allCellsAlways" ng-click="playerPicks(currentCell)"
                 ng-class="{xclass: currentCell.status=='X', yclass: currentCell.status =='O'}" id="aBox">
                 <!--Box: {{currentCell.status}}-->
+    
             </div>
             
         </div>
