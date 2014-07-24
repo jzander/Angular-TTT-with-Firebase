@@ -2,13 +2,16 @@ var TTTApp = angular.module('TTTApp', ["firebase"]);
 
 TTTApp.controller('TTTController', function ($scope, $firebase) {
 
-  var TTTRef = new Firebase("https://torid-fire-6779.firebaseio.com/") ;
+  var TTTRef = new Firebase("https://angulartoetactic.firebaseIO.com/") ;
 
-  $scope.clickCounter = $firebase(new Firebase("https://torid-fire-6779.firebaseio.com/" + '/clickCounter'));
+  $scope.clickCounter = $firebase(new Firebase("https://TTT.firebaseio.com/" + '/clickCounter'));
 //   $scope.clickCounter.$add({clickCount:0});
 
   $scope.clickCount = 0 ; // <------ number of clicks reset after new game?
 //  $scope.gamesPlayed = 0 ; //<----- number of games played at start of game.
+  
+  $scope.remoteCellList = 
+  $firebase(new Firebase("https://angulartoetactic.firebaseIO.com/" + '/remoteCellList')) ;
   
 
   $scope.testString = "Angular source, App, and Controller present" ;
@@ -25,6 +28,8 @@ TTTApp.controller('TTTController', function ($scope, $firebase) {
 		{status: "I", id:8}
 	]  ;
 
+$scope.remoteCellList.$bind($scope, "cellList");
+
 var winOptions = [ // all possible winning combinations.
 	  [0,1,2],
 	  [3,4,5],
@@ -39,6 +44,10 @@ var winOptions = [ // all possible winning combinations.
 $scope.p1 = []; //giving each player an empty array to store moves.
 $scope.p2 = [];
 
+	$scope.$watch('cellList', function() {
+		console.log('model changed!') ;
+	}) ;
+
   $scope.testJS = function() { 
     console.log('Correctly accessing JS function.') ; 
   } ;
@@ -46,7 +55,7 @@ $scope.p2 = [];
  
   $scope.playerPicks = function(thisCell) { 
   		if ( thisCell.status == "X" || thisCell.status == "O" )
-  	  		return;	 //if a cell has a status of X or Y, exit the function and render the box unclickable and unchangeable until next game.
+  	  		return;	 //if a cell has a status of X or O, exit the function and render the box unclickable and unchangeable until next game.
   		  			
 		if ($scope.clickCount %2!=0){ //every even move is O's turn
 			thisCell.status = "O" ;

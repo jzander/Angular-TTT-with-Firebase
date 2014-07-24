@@ -59,7 +59,7 @@
 	 		<p id="winner"></p>
 	</section>
 
-    <div x-ng-controller="TTTController">
+    <div x-ng-controller="TTTController" ng-model="cellList">
         <p>TTT Reference with Firebase: {{clickCount}} clicks</p>
         <div class="theBox" >
             <div x-ng-repeat="currentCell in cellList">
