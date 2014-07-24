@@ -4,52 +4,11 @@
     <title>TTT REFERENCE WITH FIREBASE</title>
     <link rel="stylesheet" type="text/css" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/ngTTT.css">	
+    <link rel="stylesheet" href="css/animate.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular.js"></script>
     <script src="js/app.js"></script>
     <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.17/firebase.js'></script>
     <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>    
-    <style>
-    
-    body {
-    	width: 600;
-    	margin: 0 auto;
-    	text-align: center;
-    }
-    
-    .theBox {
-    	width: 468px;
-    	height: 468px;
-        border-style: solid;
-        border-color: red;
-        margin: 0 auto 0 auto;
-        background-color: white;
-    
-    }
-    
-    .allCellsAlways {
-        width: 150px;
-    	height: 150px;
-    	display: inline-block;
-        float: left;
-        margin: 0px ;
-        padding: 0px ;
-        border-style: solid;
-        border-color: blue;
-    }
-    
-    .xclass {
-    	background-color: red ;
-    }
-    
-    .yclass {
-    	background-color: orange ;
-    }
-    
-    .blankclass {
-    	background-color: gray ;
-    }
-    
-    </style>
     
 </head>
 <body>
@@ -59,21 +18,21 @@
 	 		<p id="winner"></p>
 	</section>
 
-    <div x-ng-controller="TTTController" ng-model="cellList">
-        <p>TTT Reference with Firebase: {{clickCount}} clicks</p>
+    <div x-ng-controller="TTTController" ng-model="cellListContainer.cellListArray">
+        <p><!--TTT Reference with Firebase: --><br /><br /><!--{{clickCount}} clicks--></p>
         <div class="theBox" >
-            <div x-ng-repeat="currentCell in cellList">
+            <div x-ng-repeat="currentCell in cellListContainer.cellListArray">
                 <div class="allCellsAlways" ng-click="playerPicks(currentCell)"
-                ng-class="{xclass: currentCell.status=='X', yclass: currentCell.status =='O'}">
+                ng-class="{xclass: currentCell.status=='X', yclass: currentCell.status =='O'}" id="aBox">
                 <!--Box: {{currentCell.status}}-->
             </div>
             
         </div>
     </div>
     <br>
-    {{testString}}
+<!--    {{testString}}-->
     <p></p>
-    <button ng-click="testJS()">TEST BUTTON</button>
+<!--    <button ng-click="testJS()">TEST BUTTON</button>-->
 </div>
 
 </body>

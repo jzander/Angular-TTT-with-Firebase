@@ -1,35 +1,56 @@
-
+ body {
+ 	width: 100%;
+ 	margin: 0 auto;
+ 	text-align: center;
+ }
+ 
 .theBox {
-	width: 468px;
-	height: 468px;
-    border-style: solid;
-    border-color: red;
-    background-color: yellow;
+		width: 468px;
+		height: 468px;
+		border-style: none;
+		border-color: none;
+		margin: 0 auto 0 auto;
+		background-color: #708090;
 }
 
-.allCellsAlways {
-    width: 150px;
+#aBox {
+	display: inline-block;
+	-webkit-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+	-webkit-transition-property: -webkit-transform;
+	transition-property: transform;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	transform: translateZ(0);
+}
+
+#aBox:hover {
+	background-color: #cfcfcf;
+	-webkit-transform: scale(1.05);
+	-ms-transform: scale(1.05);
+	transform: scale(1.05);
+}
+    
+ .allCellsAlways {
+	width: 150px;
 	height: 150px;
 	display: inline-block;
-    float: left;
-    margin: 0px ;
-    padding: 0px ;
-    border-style: solid;
-    border-color: blue;
-}
-
-.xclass {
-	background-color: red ;
-}
-
-.oclass {
-	background-color: blue ;
-}
-
-.blankclass {
-	background-color: gray ;
-}
-
-
-  
-
+	float: left;
+	margin: 0px ;
+	padding: 0px ;
+	border-style: solid;
+	border-color: white;
+ }
+ 
+ .xclass {
+ 	background-color: red ;
+ }
+ 
+ .yclass {
+ 	background-color: orange ;
+ }
+ 
+ .blankclass {
+ 	background-color: gray ;
+ }

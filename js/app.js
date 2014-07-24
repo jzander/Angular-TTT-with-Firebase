@@ -2,17 +2,16 @@ var TTTApp = angular.module('TTTApp', ["firebase"]);
 
 TTTApp.controller('TTTController', function ($scope, $firebase) {
 
-  var TTTRef = new Firebase("https://angulartoetactic.firebaseIO.com/") ;
+  var TTTRef = new Firebase("https://tictacgo.firebaseio.com/") ;
 
-  $scope.clickCounter = $firebase(new Firebase("https://angulartoetactic.firebaseio.com/clickCounter"));
+  $scope.clickCounter = $firebase(new Firebase("https://tictacgo.firebaseio.com/clickCounter"));
 //   $scope.clickCounter.$add({clickCount:0});
 
   $scope.clickCount = 0 ; // <------ number of clicks reset after new game?
 //  $scope.gamesPlayed = 0 ; //<----- number of games played at start of game.
   
-  $scope.remoteCellList = 
-  	$firebase(new Firebase("https://angulartoetactic.firebaseIO.com/remoteCellList")) ;
-  
+  $scope.remoteCellListContainer = 
+  	$firebase(new Firebase("https://tictacgo.firebaseio.com/remoteCellListContainer")) ;
 
   $scope.testString = "Angular source, App, and Controller present" ;
 
@@ -28,7 +27,22 @@ TTTApp.controller('TTTController', function ($scope, $firebase) {
 		{status: "I", cellId:8}
 	]  ;
 
-$scope.remoteCellList.$bind($scope, "cellList");
+	$scope.p1 = ["z"]; //giving each player an empty array to store moves.
+	$scope.p2 = ["z"];
+
+
+
+$scope.cellListContainer = {
+	cellListArray: $scope.cellList,
+	p1Array: $scope.p1,
+	p2Array: $scope.p2 } ; 
+
+
+//object inside {} with one property> CellListArray
+
+$scope.remoteCellListContainer.$bind($scope, "cellListContainer");
+
+//Firebase.enableLogging(true)
 
 var winOptions = [ // all possible winning combinations.
 	  [0,1,2],
@@ -41,10 +55,9 @@ var winOptions = [ // all possible winning combinations.
 	  [2,5,8]
   ];
   
-$scope.p1 = []; //giving each player an empty array to store moves.
-$scope.p2 = [];
 
-	$scope.$watch('cellList', function() {
+
+	$scope.$watch('cellListContainer.cellListArray', function() {
 		console.log('model changed!') ;
 	}) ;
 
@@ -56,19 +69,22 @@ $scope.p2 = [];
   $scope.playerPicks = function(thisCell) { 
   		if ( thisCell.status == "X" || thisCell.status == "O" )
   	  		return;	 //if a cell has a status of X or O, exit the function and render the box unclickable and unchangeable until next game.
+  		
+  		playerOneArray = $scope.cellListContainer.p1Array;
+  		playerTwoArray = $scope.cellListContainer.p2Array;
   		  			
-		if ($scope.clickCount %2!=0 || $scope.p2.length < $scope.p1.length){ //every even move is O's turn
+		if (playerTwoArray.length < playerOneArray.length){ //every even move is O's turn
 			thisCell.status = "O" ;
 			thisCell.player = "p2"; // O is player two
-			$scope.p2.push(thisCell.cellId); // put the unique ID number for the chosen cell into p2's array.
-			console.log(thisCell.status, thisCell.cellId, thisCell.player, $scope.p1, $scope.p2);
+			playerTwoArray.push(thisCell.cellId); // put the unique ID number for the chosen cell into p2's array.
+			console.log(thisCell.status, thisCell.cellId, thisCell.player, playerOneArray, playerTwoArray);
 		}
 			
 		else {
 			thisCell.status = "X" ; //all other moves are X's.
 			thisCell.player = "p1"; // X is player one.
-			$scope.p1.push(thisCell.cellId); // put the unique ID number for the chosen cell into p1's array.
-			console.log(thisCell.status, thisCell.cellId, thisCell.player, $scope.p1, $scope.p2);
+			playerOneArray.push(thisCell.cellId); // put the unique ID number for the chosen cell into p1's array.
+			console.log(thisCell.status, thisCell.cellId, thisCell.player, playerOneArray, playerTwoArray);
 		}
 		
 		$scope.winCheck(); //run the wincheck function after each turn.
@@ -82,8 +98,8 @@ $scope.p2 = [];
 				var xPlays = 0;
 				var oPlays = 0;
 					for (var j = 0; j < winOptions[i].length; j++) { 
-						for(var k = 0; k < $scope.p1.length; ++k){
-							if($scope.p1[k] == winOptions[i][j]) {
+						for(var k = 0; k < playerOneArray.length; ++k){
+							if(playerOneArray[k] == winOptions[i][j]) {
 								if ((++xPlays) == 3)
 								console.log('X wins');
 								//insert inner html XWINS!
@@ -93,8 +109,8 @@ $scope.p2 = [];
 							}
 						}
 						
-						for(var k = 0; k < $scope.p2.length; ++k){
-							if($scope.p2[k] == winOptions[i][j]) {
+						for(var k = 0; k < $scope.cellListContainer.p2Array.length; ++k){
+							if(playerTwoArray[k] == winOptions[i][j]) {
 								if ((++oPlays) == 3)
 								console.log('O wins');
 								//insert inner html OWINS!

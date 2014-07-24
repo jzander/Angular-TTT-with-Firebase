@@ -1,5 +1,5 @@
 {
-  "firebase": "angulartoetactic",
+  "firebase": "tictacgo",
   "public": ".",
   "ignore": [
     "firebase.json",
