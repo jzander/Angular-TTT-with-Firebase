@@ -18,7 +18,7 @@ TTTApp.controller('TTTController', function ($scope, $firebase) {
 
   $scope.clickCount = 0 ;
   $scope.newGame = "YES";
-  $scope.winScreen = false;
+  $scope.lastScreen = "NO";
 
 //  $scope.playGame = true;
    // <------ number of clicks reset after new game?
@@ -77,7 +77,8 @@ $scope.cellListContainer = {
 	firstScreen: $scope.newGame,
 	cellListArray: $scope.cellList,
 	p1Array: $scope.p1,
-	p2Array: $scope.p2
+	p2Array: $scope.p2,
+	winScreen: $scope.lastScreen
 	} ; 
 
 //object inside {} with one property> CellListArray
@@ -103,15 +104,17 @@ var winOptions = [ // all possible winning combinations.
 		console.log('model changed!') ;
 	}) ;
 
-  $scope.testJS = function() { 
-    console.log('Correctly accessing JS function.') ; 
-  } ;
+	$scope.testJS = function() { 
+	console.log('Correctly accessing JS function.') ; 
+	} ;
   
-  $scope.startScreen = function () {
-  	$scope.cellListContainer.firstScreen = "NO";
-  	console.log($scope.cellListContainer.firstScreen);
-  }
+	$scope.startScreen = function () {
+		$scope.cellListContainer.firstScreen = "NO";
+	}
 
+	$scope.endScreen = function () {
+		$scope.cellListContainer.winScreen = "NO";
+	}
  
   $scope.playerPicks = function(thisCell) { 
   		if ( thisCell.status == "X" || thisCell.status == "O" )
@@ -148,7 +151,7 @@ var winOptions = [ // all possible winning combinations.
 						for(var k = 0; k < playerOneArray.length; ++k){
 							if(playerOneArray[k] == winOptions[i][j]) {
 								if ((++xPlays) == 3)
-								$scope.winxScreen = true;
+								$scope.cellListContainer.winScreen = "YES";
 								
 //								$scope.playGame = true;
 								//insert inner html XWINS!

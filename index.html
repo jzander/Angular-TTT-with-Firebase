@@ -37,7 +37,7 @@
 	        
         </div>
          
-         <div ng-show="winxScreen" class="winnerScreen"><br /><br />
+         <div ng-class="({winnerScreen: cellListContainer.winScreen == 'YES', hideStart: cellListContainer.winScreen !== 'YES'})"><br /><br />
          	
          	<h1>Player X Wins!</h1>
          
@@ -47,7 +47,7 @@
              
          </div>
          
-         <div ng-show="winoScreen" class="winnerScreen"><br /><br />
+         <div ng-class="({winnerScreen: cellListContainer.winScreen == 'YES', hideStart: cellListContainer.winScreen !== 'YES'})"><br /><br />
          	
          	<h1>Player O Wins!</h1>
          
