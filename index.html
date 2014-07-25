@@ -9,7 +9,7 @@
     <script src="js/app.js"></script>
     <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.17/firebase.js'></script>
     <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>    
-    
+
 </head>
 <body>
 	
@@ -22,8 +22,80 @@
     	
         <p><!--TTT Reference with Firebase: --><br /><br /><!--{{clickCount}} clicks--></p>
         <div class="theBox" >
-        <div ng-show="playGame()" class="startScreen"><br /><br /><h1>Welcome to<br/> Tic Tac Toe.</h1>
-        <button ng-click="startScreen()" class="startBtn">Play!</button></div>
+       
+        <div ng-show="newGame" class="startScreen"><br /><br />
+        	
+        	<h1 class="startTxt">
+	        	Welcome to<br/> 
+	        	Tic Tac Toe.
+        	</h1>
+        
+	        <button ng-click="startScreen()" class="startBtn">
+	        	Play!
+	        </button>
+	        
+        </div>
+         
+         <div ng-show="winxScreen" class="winnerScreen"><br /><br />
+         	
+         	<h1>Player X Wins!</h1>
+         
+             <button onclick="window.location.href='index.html'" class="startBtn">
+             	Play Again!
+             </button>
+             
+         </div>
+         
+         <div ng-show="winoScreen" class="winnerScreen"><br /><br />
+         	
+         	<h1>Player O Wins!</h1>
+         
+             <button onclick="window.location.href='index.html'" class="startBtn">
+             	Play Again!
+             </button>
+             
+         </div>
+         
+        	
+<!--    <div="userOptn" ng-show="userOptnOne">
+     	
+         	<button ng-click="onePlayer" class="startBtn">
+         		One Player
+         	</button>
+         	
+         	<button ng-click="twoPlayer" class="startBtn">
+         		Two Player
+         	</button>
+    	
+    	</div>
+    	
+    	
+    	
+    	<div class="onePlayerNameInput" ng-show="playerName" ng-model="playerInput">
+    	
+    		<input ng-bind="poneInput" type="text" class="pName" placeholder="Player 1">
+    		
+    		<button ng-click="onePlayer" class="startBtn">
+    			Play!
+    		</button>
+    		
+    	</div>
+    	
+    	
+    	
+    	<div class="twoPlayerNameInput" ng-show="twoPlayerNames" ng-model="playerInput">
+    	
+    		<input ng-bind="poneInput" type="text" class="pName" placeholder="Player 1">
+    		
+    		<input ng-bind="ptwoInput" type="text" class="pName" placeholder="Player 2">
+    		
+    		<button ng-click="twoPlayer" class="startBtn">
+    			Play!
+    		</button>
+    		
+    	</div>-->
+        
+        
             <div x-ng-repeat="currentCell in cellListContainer.cellListArray">
                 <div class="allCellsAlways" ng-click="playerPicks(currentCell)"
                 ng-class="{xclass: currentCell.status=='X', yclass: currentCell.status =='O'}" id="aBox">
