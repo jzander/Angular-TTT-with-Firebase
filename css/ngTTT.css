@@ -27,6 +27,10 @@
 	padding-top: 5em;
 }
 
+.hideStart {
+	display: none;
+}
+
 .winnerScreen {
 	width: 468px;
 	height: 468px;

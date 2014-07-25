@@ -11,15 +11,13 @@ var TTTApp = angular.module('TTTApp', ["firebase"]);
 
 TTTApp.controller('TTTController', function ($scope, $firebase) {
 
-  var TTTRef = new Firebase("https://tictacgo.firebaseio.com/") ;
-
-  
+ 
 
   $scope.clickCounter = $firebase(new Firebase("https://tictacgo.firebaseio.com/clickCounter"));
 //   $scope.clickCounter.$add({clickCount:0});
 
   $scope.clickCount = 0 ;
-  $scope.newGame = true;
+  $scope.newGame = "YES";
   $scope.winScreen = false;
 
 //  $scope.playGame = true;
@@ -28,21 +26,33 @@ TTTApp.controller('TTTController', function ($scope, $firebase) {
   
   $scope.remoteCellListContainer = 
   	$firebase(new Firebase("https://tictacgo.firebaseio.com/remoteCellListContainer")) ;
+  	
+//  $scope.newGame = $firebase(new Firebase("https://tictacgo.firebaseio.com/newGame")) ;
+//  
+
 
   $scope.testString = "Angular source, App, and Controller present" ;
 
 
-	$scope.startScreen = function () {
-		$scope.newGame = false;
-	}
+
 	
-	$scope.endScreen = function () {
-		$scope.winxScreen = false;
-		$scope.winoScreen = false;
-		$scope.newGame = true;
-		$scope.p1.length = 0; 
-		$scope.p2.length = 0;		
-	}
+//	$scope.endScreen = function () {
+//		$scope.winxScreen = false;
+//		$scope.winoScreen = false;
+//		$scope.newGame = true;
+//		$scope.cellList = [ // each individual cell with a unique ID.
+//				{status: "A", cellId:0}, 
+//				{status: "B", cellId:1}, 
+//				{status: "C", cellId:2}, 
+//				{status: "D", cellId:3}, 
+//				{status: "E", cellId:4}, 
+//				{status: "F", cellId:5}, 
+//				{status: "G", cellId:6}, 
+//				{status: "H", cellId:7}, 
+//				{status: "I", cellId:8}
+//			]  ;
+//		console.log($scope.cellList);	
+//	}
 	
 
 
@@ -58,16 +68,17 @@ TTTApp.controller('TTTController', function ($scope, $firebase) {
 		{status: "I", cellId:8}
 	]  ;
 
-	$scope.p1 = ["z"]; //giving each player an empty array to store moves.
+	$scope.p1 = ["z"]; //giving each player an array to store moves.
 	$scope.p2 = ["z"];
 
 
 
 $scope.cellListContainer = {
+	firstScreen: $scope.newGame,
 	cellListArray: $scope.cellList,
 	p1Array: $scope.p1,
-	p2Array: $scope.p2 } ; 
-
+	p2Array: $scope.p2
+	} ; 
 
 //object inside {} with one property> CellListArray
 
@@ -88,13 +99,18 @@ var winOptions = [ // all possible winning combinations.
   
 
 
-	$scope.$watch('cellListContainer.cellListArray', function() {
+	$scope.$watch('cellListContainer',  function() {
 		console.log('model changed!') ;
 	}) ;
 
   $scope.testJS = function() { 
     console.log('Correctly accessing JS function.') ; 
   } ;
+  
+  $scope.startScreen = function () {
+  	$scope.cellListContainer.firstScreen = "NO";
+  	console.log($scope.cellListContainer.firstScreen);
+  }
 
  
   $scope.playerPicks = function(thisCell) { 
@@ -153,6 +169,9 @@ var winOptions = [ // all possible winning combinations.
 								
 							}
 						}
+					
+					
+					
 					}
 			}
 		};
