@@ -26,12 +26,12 @@
         <div ng-class="({startScreen: cellListContainer.firstScreen == 'YES', hideStart: cellListContainer.firstScreen !== 'YES'})">
         <br /><br />
         	
-        	<h1 class="startTxt">
+        	<h1 class="startTxt bigEntrance">
 	        	Welcome to<br/> 
 	        	Tic Tac Toe.
         	</h1>
         
-	        <button ng-click="startScreen()" class="startBtn">
+	        <button ng-click="startScreen()" class="startBtn pullUp">
 	        	Play!
 	        </button>
 	        
@@ -39,19 +39,19 @@
          
          <div ng-class="({winnerScreen: cellListContainer.winScreen == 'YES', hideStart: cellListContainer.winScreen !== 'YES'})"><br /><br />
          	
-         	<h1>Player X Wins!</h1>
+         	<h1 class="bigEntrance">Player X Wins!</h1>
          
-             <button onclick="window.location.href='index.html'" ng-click="endScreen()" class="startBtn">
+             <button onclick="window.location.href='index.html'" ng-click="endScreen()" class="startBtn pullUp">
              	Play Again!
              </button>
              
          </div>
          
-         <div ng-class="({winnerScreen: cellListContainer.winScreen == 'YES', hideStart: cellListContainer.winScreen !== 'YES'})"><br /><br />
+         <div ng-class="({winnerScreenTwo: cellListContainer.winScreenTwo == 'YES', hideStart: cellListContainer.winScreenTwo !== 'YES'})"><br /><br />
          	
-         	<h1>Player O Wins!</h1>
+         	<h1 class="bigEntrance">Player O Wins!</h1>
          
-             <button onclick="window.location.href='index.html'" ng-click="endScreen()" class="startBtn">
+             <button onclick="window.location.href='index.html'" ng-click="endScreen()" class="startBtn pullUp">
              	Play Again!
              </button>
              

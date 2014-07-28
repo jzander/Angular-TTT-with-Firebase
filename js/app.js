@@ -78,7 +78,8 @@ $scope.cellListContainer = {
 	cellListArray: $scope.cellList,
 	p1Array: $scope.p1,
 	p2Array: $scope.p2,
-	winScreen: $scope.lastScreen
+	winScreen: $scope.lastScreen,
+	winScreenTwo: $scope.lastScreen
 	} ; 
 
 //object inside {} with one property> CellListArray
@@ -114,6 +115,7 @@ var winOptions = [ // all possible winning combinations.
 
 	$scope.endScreen = function () {
 		$scope.cellListContainer.winScreen = "NO";
+		$scope.cellListContainer.winScreenTwo = "NO";
 	}
  
   $scope.playerPicks = function(thisCell) { 
@@ -164,7 +166,7 @@ var winOptions = [ // all possible winning combinations.
 						for(var k = 0; k < $scope.cellListContainer.p2Array.length; ++k){
 							if(playerTwoArray[k] == winOptions[i][j]) {
 								if ((++oPlays) == 3)
-								$scope.winoScreen = true;
+								$scope.cellListContainer.winScreenTwo = "YES";
 //								$scope.playGame = true;
 								//insert inner html OWINS!
 								//push win to scoreboard.
